@@ -1,0 +1,47 @@
+<ion-view view-title="Comercios" ng-controller="ChatsCtrl" ng-init="getTasks()">
+  <ion-content>
+
+  <!-- <div class="list card" ng-repeat="task in tasks track by $index">
+            <div class="item item-divider">
+                <span ng-bind="task.title"></span>
+            </div>
+            <div class="item item-body">
+                <strong>Title: <span ng-bind="task.title"></span></strong>
+
+                <p>
+                    <span ng-bind="task.content"></span>
+                </p>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <span class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="task.completed" ng-click="completeTask($index)">
+                    </label>
+                </span>
+                <a class="tab-item assertive" ng-click="removeTask($index)">
+                    <i class="icon ion-android-close"></i>
+                </a>
+            </div>
+        </div> -->
+
+  <div class="item item-button-right">
+    Agregar más
+    <button class="button button-outline button-stable" ng-click="openModal()">
+      <i class="icon ion-android-add-circle"></i>
+    </button>
+  </div>
+    <ion-list ng-repeat="task in tasks track by $index">
+      <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+        <img ng-src="{{chat.face}}">
+        <h2 ng-bind="task.title"></h2>
+        <p ng-bind="task.title"></p>
+        <i class="icon ion-android-arrow-dropright icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

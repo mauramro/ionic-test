@@ -1,0 +1,12 @@
+{
+  "name": "eureka",
+  "app_id": "8c787483",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}
