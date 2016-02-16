@@ -39,13 +39,13 @@ angular.module('starter.controllers', ['LocalStorageModule'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  var taskData = 'task';
+  var taskData = 'test';
 
   //initialize the tasks scope with empty array
   $scope.tasks = [];
 
   //initialize the task scope with empty object
-  $scope.task = [];
+  $scope.task = {};
 
   $scope.getTasks = function () {
       //fetches task from local storage
