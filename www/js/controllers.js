@@ -56,8 +56,13 @@ angular.module('starter.controllers', ['LocalStorageModule'])
       }
   };
 
+
    $scope.createTask = function () {
       //creates a new task
+
+      //adding an ID to each task
+      $scope.task.id = $scope.tasks.length + 1;
+
       $scope.tasks.push($scope.task);
       localStorageService.set(taskData, $scope.tasks);
       $scope.task = {};
