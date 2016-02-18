@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['LocalStorageModule'])
+angular.module('starter.controllers', ['LocalStorageModule', 'starter.services'])
 
 .config(['localStorageServiceProvider', function(localStorageServiceProvider){
     localStorageServiceProvider.setPrefix('ls');
@@ -39,22 +39,19 @@ angular.module('starter.controllers', ['LocalStorageModule'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  var taskData = 'test';
 
-  //initialize the tasks scope with empty array
-  $scope.tasks = [];
+  // $scope.getTasks = function () {
+  //     //fetches task from local storage
+  //     if (localStorageService.get(taskData)) {
+  //         $scope.tasks = localStorageService.get(taskData);
+  //     } else {
+  //         $scope.tasks = [];
+  //     }
+  // };
+  taskData = Chats.taskData();
+  $scope.task = Chats.task();
+  $scope.tasks = Chats.all();
 
-  //initialize the task scope with empty object
-  $scope.task = {};
-
-  $scope.getTasks = function () {
-      //fetches task from local storage
-      if (localStorageService.get(taskData)) {
-          $scope.tasks = localStorageService.get(taskData);
-      } else {
-          $scope.tasks = [];
-      }
-  };
 
 
    $scope.createTask = function () {
@@ -103,7 +100,10 @@ angular.module('starter.controllers', ['LocalStorageModule'])
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+  // $scope.chat = Chats.get($stateParams.chatId);
+  $scope.chat = Chats.all();
+  console.log($scope.chat[0].title);
+
 })
 
 .controller('AccountCtrl', function($scope) {
