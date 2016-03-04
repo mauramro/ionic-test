@@ -9,12 +9,42 @@
             <form ng-submit="createTask()">
                 <div class="list list-inset">
                     <label class="item item-input">
-                        <input ng-model="task.title" type="text" placeholder="Task title">
+                        <input ng-model="task.title" type="text" placeholder="Comercio">
                     </label>
                     <label class="item item-input">
-                        <textarea ng-model="task.content" rows="5" placeholder="Task content"></textarea>
+                        <textarea ng-model="task.content" rows="2" placeholder="Descripción"></textarea>
                     </label>
-                    <ul class="list">
+                    <!-- products delivered -->
+                    <h2>Entregados</h2>
+                    <div class="list">
+
+                      <label class="item item-input item-select">
+                        <div class="input-label">
+                          Tipo de mercaderia
+                        </div>
+                        <select>
+                          <option selected>Aretes</option>
+                          <option>Collares</option>
+                          <option>Anillos</option>
+                        </select>
+                      </label>
+
+                    </div>
+                    <!-- <div class="row">
+                      <label class="item item-input col">
+                        Aretes
+                        <input type="number" placeholder="Entregados" ng-model="task.aretes">
+                      </label>
+                       <label class="item item-input col">
+                        Collares
+                        <input type="number" placeholder="Entregados" ng-model="task.collares">
+                      </label>
+                       <label class="item item-input col">
+                        Anillos
+                        <input type="number" placeholder="Entregados" ng-model="task.anillos">
+                      </label -->
+                </div>
+                    <!-- <ul class="list">
                         <li class="item item-toggle">
                             Completed?
                             <label class="toggle toggle-balanced">
@@ -25,7 +55,7 @@
                                 </div>
                             </label>
                         </li>
-                    </ul>
+                    </ul> -->
                     <button type="submit" class="button button-block button-positive">Create Task</button>
                 </div>
             </form>
