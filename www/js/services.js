@@ -41,7 +41,8 @@ angular.module('starter.services', ['LocalStorageModule'])
       return tasks;
     },
     remove: function(chat) {
-      tasks.splice(tasks.indexOf(chat), 1);
+      tasks.splice(chat, 1);
+      localStorageService.set(taskData, tasks);
     },
     get: function(chatId) {
       for (var i = 0; i < tasks.length; i++) {
