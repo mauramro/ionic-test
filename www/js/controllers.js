@@ -53,8 +53,17 @@ angular.module('starter.controllers', ['LocalStorageModule', 'starter.services']
   $scope.tasks = Chats.all();
 
 
+  $scope.Answers = {};
 
-   $scope.createTask = function () {
+  $scope.Items = [
+    {
+        "Text": "Favorite color?",
+        "Name": "ColorQuestion",
+        "Options": ["Red", "Blue", "Green"]
+    }
+  ];
+
+  $scope.createTask = function () {
       //creates a new task
 
       //adding an ID to each task
@@ -63,6 +72,8 @@ angular.module('starter.controllers', ['LocalStorageModule', 'starter.services']
       $scope.tasks.push($scope.task);
       localStorageService.set(taskData, $scope.tasks);
       $scope.task = {};
+
+      console.log($scope.Items[0]);
 
       //close new task modal
       $scope.modal.hide();
@@ -97,6 +108,7 @@ angular.module('starter.controllers', ['LocalStorageModule', 'starter.services']
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {

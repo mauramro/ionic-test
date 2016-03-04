@@ -22,11 +22,12 @@
                         <div class="input-label">
                           Tipo de mercaderia
                         </div>
-                        <select>
+                        <select ng-model="Answers[Items.Name]" ng-options="option for option in Items[0].Options"></select>
+                        <!-- <select>
                           <option selected>Aretes</option>
                           <option>Collares</option>
                           <option>Anillos</option>
-                        </select>
+                        </select> -->
                       </label>
 
                     </div>
@@ -43,7 +44,6 @@
                         Anillos
                         <input type="number" placeholder="Entregados" ng-model="task.anillos">
                       </label -->
-                </div>
                     <!-- <ul class="list">
                         <li class="item item-toggle">
                             Completed?
