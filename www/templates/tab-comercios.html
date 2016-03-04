@@ -32,7 +32,7 @@
     </button>
   </div>
     <ion-list ng-repeat="task in tasks track by $index">
-      <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap" href="#/tab/chats/{{task.id}}">
         <img ng-src="{{chat.face}}">
         <h2 ng-bind="task.title"></h2>
         <p ng-bind="task.content"></p>

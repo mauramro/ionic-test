@@ -100,10 +100,7 @@ angular.module('starter.controllers', ['LocalStorageModule', 'starter.services']
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  // $scope.chat = Chats.get($stateParams.chatId);
-  $scope.chat = Chats.all();
-  console.log($scope.chat[0].title);
-
+  $scope.task = Chats.get($stateParams.chatId);
 })
 
 .controller('AccountCtrl', function($scope) {
