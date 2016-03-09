@@ -6,31 +6,31 @@
             </button>
         </ion-header-bar>
         <ion-content>
-            <form ng-submit="createTask()">
+            <form ng-submit="createTask(item)">
                 <div class="list list-inset">
                     <label class="item item-input">
-                        <input ng-model="task.title" type="text" placeholder="Comercio">
+                        <input ng-model="item.name" type="text" placeholder="Comercio">
                     </label>
                     <label class="item item-input">
-                        <textarea ng-model="task.content" rows="2" placeholder="Descripción"></textarea>
+                        <textarea ng-model="item.description" rows="2" placeholder="Descripción"></textarea>
                     </label>
                     <!-- products delivered -->
-                    <h2>Entregados</h2>
+                    <!-- <h2>Entregados</h2>
                     <div class="list">
 
                       <label class="item item-input item-select">
                         <div class="input-label">
                           Tipo de mercaderia
                         </div>
-                        <select ng-model="Answers[Items.Name]" ng-options="option for option in Items[0].Options"></select>
+                        <select ng-model="Answers[Items.Name]" ng-options="option for option in Items[0].Options"></select> -->
                         <!-- <select>
                           <option selected>Aretes</option>
                           <option>Collares</option>
                           <option>Anillos</option>
                         </select> -->
-                      </label>
+                     <!--  </label>
 
-                    </div>
+                    </div> -->
                     <!-- <div class="row">
                       <label class="item item-input col">
                         Aretes

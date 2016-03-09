@@ -1,8 +1,8 @@
-angular.module('starter.controllers', ['LocalStorageModule', 'starter.services'])
+angular.module('starter.controllers', ['starter.services'])
 
-.config(['localStorageServiceProvider', function(localStorageServiceProvider){
-    localStorageServiceProvider.setPrefix('ls');
-  }])
+// .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+//     localStorageServiceProvider.setPrefix('ls');
+//   }])
 .controller('DashCtrl', function($scope) {
 
   var deploy = new Ionic.Deploy();
@@ -30,7 +30,7 @@ angular.module('starter.controllers', ['LocalStorageModule', 'starter.services']
   }
 })
 
-.controller('ChatsCtrl', function($scope, Chats, $ionicModal, localStorageService) {
+.controller('ChatsCtrl', function($scope, Items, $ionicModal) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -48,41 +48,49 @@ angular.module('starter.controllers', ['LocalStorageModule', 'starter.services']
   //         $scope.tasks = [];
   //     }
   // };
-  taskData = Chats.taskData();
-  $scope.task = Chats.task();
-  $scope.tasks = Chats.all();
+
+  $scope.items = Items;
+  // $scope.get =  function() {
+  //     for (var i = 0; i < $scope.items.length; i++) {
+  //       // if ($scope.items[i].$id === parseInt(itemId)) {
+  //         console.log($scope.items[i]);
+  //         return $scope.items[i];
+  //       // }
+  //     }
+  //     return null;
+  //   }
+
+  //   $scope.get();
+  // taskData = Chats.taskData();
+  // $scope.task = Chats.task();
+  // $scope.tasks = Chats.all();
 
 
-  $scope.Answers = {};
+  // $scope.Answers = {};
 
-  $scope.Items = [
-    {
-        "Text": "Favorite color?",
-        "Name": "ColorQuestion",
-        "Options": ["Red", "Blue", "Green"]
-    }
-  ];
+  // $scope.Items = [
+  //   {
+  //       "Text": "Favorite color?",
+  //       "Name": "ColorQuestion",
+  //       "Options": ["Red", "Blue", "Green"]
+  //   }
+  // ];
 
-  $scope.createTask = function () {
-      //creates a new task
+  $scope.createTask = function (item) {
+      var item = item;
 
-      //adding an ID to each task
-      $scope.task.id = $scope.tasks.length + 1;
-
-      $scope.tasks.push($scope.task);
-      localStorageService.set(taskData, $scope.tasks);
-      $scope.task = {};
-
-      console.log($scope.Items[0]);
-
+      $scope.items.$add({
+        "name": item.name,
+        "description": item.description
+      });
       //close new task modal
       $scope.modal.hide();
   };
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+  // $scope.chats = Chats.all();
+  // $scope.remove = function(chat) {
+  //   Chats.remove(chat);
+  // };
 
   $ionicModal.fromTemplateUrl('templates/form-modal.html', {
     scope: $scope,
@@ -111,7 +119,7 @@ angular.module('starter.controllers', ['LocalStorageModule', 'starter.services']
 
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Items) {
   $scope.task = Chats.get($stateParams.chatId);
 })
 

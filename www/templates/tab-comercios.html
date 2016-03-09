@@ -1,4 +1,4 @@
-<ion-view view-title="Comercios" ng-controller="ChatsCtrl" ng-init="getTasks()">
+<ion-view view-title="Comercios" ng-controller="ChatsCtrl">
   <ion-content>
 
   <!-- <div class="list card" ng-repeat="task in tasks track by $index">
@@ -31,11 +31,11 @@
       <i class="icon ion-android-add-circle"></i>
     </button>
   </div>
-    <ion-list ng-repeat="task in tasks track by $index">
+    <ion-list ng-repeat="item in items">
       <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap" href="#/tab/chats/{{task.id}}">
         <img ng-src="{{chat.face}}">
-        <h2 ng-bind="task.title"></h2>
-        <p ng-bind="task.content"></p>
+        <h2 ng-bind="item.name"></h2>
+        <p ng-bind="item.description"></p>
         <i class="icon ion-android-arrow-dropright icon-accessory"></i>
 
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
