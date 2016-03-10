@@ -39,33 +39,7 @@ angular.module('starter.controllers', ['starter.services'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-
-  // $scope.getTasks = function () {
-  //     //fetches task from local storage
-  //     if (localStorageService.get(taskData)) {
-  //         $scope.tasks = localStorageService.get(taskData);
-  //     } else {
-  //         $scope.tasks = [];
-  //     }
-  // };
-
   $scope.items = Items;
-  // $scope.get =  function() {
-  //     for (var i = 0; i < $scope.items.length; i++) {
-  //       // if ($scope.items[i].$id === parseInt(itemId)) {
-  //         console.log($scope.items[i]);
-  //         return $scope.items[i];
-  //       // }
-  //     }
-  //     return null;
-  //   }
-
-  //   $scope.get();
-  // taskData = Chats.taskData();
-  // $scope.task = Chats.task();
-  // $scope.tasks = Chats.all();
-
-
   // $scope.Answers = {};
 
   // $scope.Items = [
@@ -88,10 +62,10 @@ angular.module('starter.controllers', ['starter.services'])
   };
 
   // $scope.chats = Chats.all();
-  // $scope.remove = function(chat) {
-  //   Chats.remove(chat);
+  // $scope.remove = function(item) {
+  //   Items.remove(item);
   // };
-
+ 
   $ionicModal.fromTemplateUrl('templates/form-modal.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -120,7 +94,19 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Items) {
-  $scope.task = Chats.get($stateParams.chatId);
+
+  $scope.items = Items;
+
+  $scope.items.get = function(chatId) {
+    for (var i = 0; i < $scope.items.length; i++) {
+      if ($scope.items[i].$id === chatId) {
+        return $scope.items[i];
+      }
+    }
+    return null;
+  }
+  $scope.item = $scope.items.get($stateParams.chatId);
+
 })
 
 .controller('AccountCtrl', function($scope) {
