@@ -10,6 +10,28 @@
     <p>
       Descripción: {{ item.name }}
     </p>
-    <p></p>
+    
+    <!-- products delivered -->
+    <h4>Agregar mercaderia</h4>
+    <form ng-submit="addItems(merc)">
+      <div class="list">  
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Tipo de mercaderia
+            </div>
+            <select ng-model="Answers[Items.Name]" ng-options="option for option in Items[0].Options"></select>
+           <!--  <select>
+              <option selected>Aretes</option>
+              <option>Collares</option>
+              <option>Anillos</option>
+            </select> -->
+          </label>
+          <label class="item item-input">
+            <input ng-model="item.quantity" type="number" placeholder="Número de productos"/>
+          </label>
+          <button type="submit" class="button button-block button-positive">Agregar items</button>
+      </div>
+    </form>
+
   </ion-content>
 </ion-view>

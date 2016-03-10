@@ -40,15 +40,6 @@ angular.module('starter.controllers', ['starter.services'])
   //});
 
   $scope.items = Items;
-  // $scope.Answers = {};
-
-  // $scope.Items = [
-  //   {
-  //       "Text": "Favorite color?",
-  //       "Name": "ColorQuestion",
-  //       "Options": ["Red", "Blue", "Green"]
-  //   }
-  // ];
 
   $scope.createTask = function (item) {
       var item = item;
@@ -107,6 +98,36 @@ angular.module('starter.controllers', ['starter.services'])
   }
   $scope.item = $scope.items.get($stateParams.chatId);
 
+
+
+  // Detailed section
+
+  $scope.addItems = function (merc) {
+      var merc = merc;
+      var bdItem = Items.$getRecord($scope.item.$id);
+
+      // Items.$getRecord($scope.item.$id).$add({
+      //     "nombre": "arete",
+      //     "cantidad": 2
+      // });
+      // bdItem.add({
+      //     "nombre": "arete",
+      //     "cantidad": 2
+      // });
+      //close new task modal
+      // $scope.modal.hide();
+  };
+
+
+  $scope.Answers = {};
+
+  $scope.Items = [
+    {
+        "Text": "Favorite color?",
+        "Name": "ColorQuestion",
+        "Options": ["Red", "Blue", "Green"]
+    }
+  ];
 })
 
 .controller('AccountCtrl', function($scope) {
