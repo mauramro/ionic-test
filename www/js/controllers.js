@@ -30,7 +30,7 @@ angular.module('starter.controllers', ['starter.services'])
   }
 })
 
-.controller('ChatsCtrl', function($scope, Items, $ionicModal) {
+.controller('ChatsCtrl', function($scope, Items, $firebaseArray, $ionicModal) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -38,15 +38,18 @@ angular.module('starter.controllers', ['starter.services'])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  $scope.items = $firebaseArray(Items.itemsRef());
 
-  $scope.items = Items;
+  // console.log($scope.items.$ref().child("-KCRO0UPFlH0zcJ9zX38").toString());
+  console.log($scope.items);
 
   $scope.createTask = function (item) {
       var item = item;
 
       $scope.items.$add({
         "name": item.name,
-        "description": item.description
+        "description": item.description,
+        "records": []
       });
       //close new task modal
       $scope.modal.hide();
@@ -84,28 +87,27 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Items) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Items, $firebaseArray) {
 
-  $scope.items = Items;
+  $scope.items = $firebaseArray(Items.itemsRef());
 
-  $scope.items.get = function(chatId) {
-    for (var i = 0; i < $scope.items.length; i++) {
-      if ($scope.items[i].$id === chatId) {
-        return $scope.items[i];
+  $scope.items.$loaded().then(function(){
+    angular.forEach($scope.items, function(item) {
+      if (item.$id === $stateParams.chatId ) {
+        $scope.item = item;
+        console.log($scope.item);
+        return $scope.item;
       }
-    }
-    return null;
-  }
-  $scope.item = $scope.items.get($stateParams.chatId);
-
-
+    })
+  });
 
   // Detailed section
 
   $scope.addItems = function (merc) {
       var merc = merc;
-      var bdItem = Items.$getRecord($scope.item.$id);
-
+      // var bdItem = Items.$getRecord($scope.item.$id);
+      var bdItem = $firebaseArray(Items.item());
+      console.log(bdItem);
       // Items.$getRecord($scope.item.$id).$add({
       //     "nombre": "arete",
       //     "cantidad": 2
