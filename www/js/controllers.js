@@ -40,7 +40,7 @@ angular.module('starter.controllers', ['starter.services'])
   //});
   $scope.items = $firebaseArray(Items.itemsRef());
 
-  // console.log($scope.items.$ref().child("-KCRO0UPFlH0zcJ9zX38").toString());
+  
   console.log($scope.items);
 
   $scope.createTask = function (item) {
@@ -52,6 +52,7 @@ angular.module('starter.controllers', ['starter.services'])
         "records": []
       });
       //close new task modal
+      
       $scope.modal.hide();
   };
 
@@ -101,13 +102,36 @@ angular.module('starter.controllers', ['starter.services'])
     })
   });
 
+  // console.log($stateParams.chatId);
   // Detailed section
 
   $scope.addItems = function (merc) {
       var merc = merc;
       // var bdItem = Items.$getRecord($scope.item.$id);
-      var bdItem = $firebaseArray(Items.item());
-      console.log(bdItem);
+      // console.log($scope.items.$ref().child($stateParams.chatId).toString());
+      $scope.currentId = $scope.items.$ref().child($stateParams.chatId);
+      $scope.currentId.update({
+          "records": {
+            "producto1": {
+              name: "nombre de producto1",
+              price: 2000,
+              type: "anillo"
+            },
+            "producto2": {
+              name: "nombre de producto21",
+              price: 3000,
+              type: "collar"
+            },
+            "producto3": {
+              name: "nombre de producto31",
+              price: 1500,
+              type: "pulsera"
+            }
+          }
+      });
+      console.log($scope.currentId);
+      // var bdItem = $firebaseArray(Items.item());
+      // console.log(bdItem);
       // Items.$getRecord($scope.item.$id).$add({
       //     "nombre": "arete",
       //     "cantidad": 2
