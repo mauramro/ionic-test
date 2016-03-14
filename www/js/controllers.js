@@ -38,18 +38,17 @@ angular.module('starter.controllers', ['starter.services'])
   //
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-  $scope.items = $firebaseArray(Items.itemsRef());
+  $scope.comercios = $firebaseArray(Items.comerciosRef());
 
   
-  console.log($scope.items);
+  // console.log($scope.comercios);
 
-  $scope.createTask = function (item) {
+  $scope.crearComercio = function (item) {
       var item = item;
 
-      $scope.items.$add({
+      $scope.comercios.$add({
         "name": item.name,
-        "description": item.description,
-        "records": []
+        "description": item.description
       });
       //close new task modal
       
@@ -61,7 +60,7 @@ angular.module('starter.controllers', ['starter.services'])
   //   Items.remove(item);
   // };
  
-  $ionicModal.fromTemplateUrl('templates/form-modal.html', {
+  $ionicModal.fromTemplateUrl('templates/form-modal-comercios.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
@@ -90,74 +89,101 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Items, $firebaseArray) {
 
-  $scope.items = $firebaseArray(Items.itemsRef());
+  //getting db comercios
+  $scope.comercios = $firebaseArray(Items.comerciosRef());
 
-  $scope.items.$loaded().then(function(){
-    angular.forEach($scope.items, function(item) {
+  $scope.comercios.$loaded().then(function(){
+    angular.forEach($scope.comercios, function(item) {
       if (item.$id === $stateParams.chatId ) {
-        $scope.item = item;
-        console.log($scope.item);
-        return $scope.item;
+        $scope.comercio = item;
+        // console.log($scope.comercio);
+        // return $scope.comercio;
       }
     })
   });
 
   // console.log($stateParams.chatId);
   // Detailed section
-
-  $scope.addItems = function (merc) {
-      var merc = merc;
-      // var bdItem = Items.$getRecord($scope.item.$id);
-      // console.log($scope.items.$ref().child($stateParams.chatId).toString());
-      $scope.currentId = $scope.items.$ref().child($stateParams.chatId);
-      $scope.currentId.update({
-          "records": {
-            "producto1": {
-              name: "nombre de producto1",
-              price: 2000,
-              type: "anillo"
-            },
-            "producto2": {
-              name: "nombre de producto21",
-              price: 3000,
-              type: "collar"
-            },
-            "producto3": {
-              name: "nombre de producto31",
-              price: 1500,
-              type: "pulsera"
-            }
-          }
-      });
-      console.log($scope.currentId);
-      // var bdItem = $firebaseArray(Items.item());
-      // console.log(bdItem);
-      // Items.$getRecord($scope.item.$id).$add({
-      //     "nombre": "arete",
-      //     "cantidad": 2
-      // });
-      // bdItem.add({
-      //     "nombre": "arete",
-      //     "cantidad": 2
-      // });
-      //close new task modal
-      // $scope.modal.hide();
-  };
-
-
+  $scope.inventario = $firebaseArray(Items.inventarioRef());
+  // console.log($scope.inventario);
   $scope.Answers = {};
+  $scope.artComercio = [];
 
-  $scope.Items = [
-    {
-        "Text": "Favorite color?",
-        "Name": "ColorQuestion",
-        "Options": ["Red", "Blue", "Green"]
-    }
-  ];
+  $scope.inventario.$loaded().then(function(){
+    angular.forEach($scope.inventario, function(articulo) {
+      // if (articulo.$id === $stateParams.chatId ) {
+        $scope.artInventario = articulo;
+        console.log($scope.artInventario);
+        $scope.artComercio.push($scope.artInventario.nombre);
+        console.log($scope.artComercio);
+        // console.log($scope.comercio);
+        // return $scope.comercio;
+      // }
+    })
+  });
+  console.log($scope.artComercio);
+  $scope.addItems = function (item) {
+      var itemName = $scope.Answers.nombre;
+      console.log(itemName);
+      // console.log($scope.items.$ref().child($stateParams.chatId).toString());
+      $scope.currentId = $scope.comercios.$ref().child($stateParams.chatId);
+      //articulos de cada comercio
+      $scope.articulos = $scope.currentId.child("articulos");
+      $scope.items =  $scope.articulos.child(itemName);
+      $scope.items.update({
+
+              name: itemName,
+              quantity: item.quantity,
+              price: 2500,
+              type: "anillo"  
+          
+      });
+      // console.log($scope.Answers);
+      // console.log($scope.Answers.nombre);
+      // console.log($scope.currentId);
+  };
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+.controller('AccountCtrl', function($scope, $ionicModal, Items, $firebaseArray) {
+
+    $scope.inventario = $firebaseArray(Items.inventarioRef());
+    console.log($scope.inventario);
+
+    // Inventario modal
+   $ionicModal.fromTemplateUrl('templates/form-modal-inventario.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
   };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+
+  //agregar articulos a inventario
+   $scope.agregarInventario = function (articulo) {
+      var articulo = articulo;
+
+      $scope.inventario.$add({
+        "nombre": articulo.nombre,
+        "precio": articulo.precio
+      });
+      //close new task modal
+      
+      $scope.modal.hide();
+  };
+
+  //going through inventario obj
+  //  $scope.inventario.$loaded().then(function(){
+  //   angular.forEach($scope.inventario, function(item) {
+  //     if (item.$id === $stateParams.chatId ) {
+  //       $scope.comercio = item;
+  //       // console.log($scope.comercio);
+  //       // return $scope.comercio;
+  //     }
+  //   })
+  // });
 });

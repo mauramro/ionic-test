@@ -62,11 +62,11 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
         }
       }
     })
-    .state('tab.chat-detail', {
+    .state('tab.comercio-detail', {
       url: '/chats/:chatId',
       views: {
         'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
+          templateUrl: 'templates/comercio-detail.html',
           controller: 'ChatDetailCtrl'
         }
       }
@@ -76,7 +76,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
     url: '/account',
     views: {
       'tab-account': {
-        templateUrl: 'templates/tab-account.html',
+        templateUrl: 'templates/tab-inventario.html',
         controller: 'AccountCtrl'
       }
     }

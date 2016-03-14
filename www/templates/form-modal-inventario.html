@@ -1,0 +1,21 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-dark">
+        <h1 class="title">Agregar a inventario</h1>
+        <button class="button button-icon" ng-click="closeModal()">
+            <i class="icon ion-android-close"></i>
+        </button>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="agregarInventario(articulo)">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input ng-model="articulo.nombre" type="text" placeholder="Nombre articulo">
+                </label>
+                <label class="item item-input">
+                    <input ng-model="articulo.precio" type="number" placeholder="Precio">
+                </label>
+                <button type="submit" class="button button-block button-positive">Agregar articulo</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

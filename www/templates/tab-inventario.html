@@ -1,0 +1,30 @@
+<ion-view view-title="Inventario">
+  <ion-content>
+	  <div class="item item-button-right">
+	    Agregar a inventario
+	    <button class="button button-outline button-stable" ng-click="openModal()">
+	      <i class="icon ion-android-add-circle"></i>
+	    </button>
+	  </div>
+	  <h4>Articulos en inventario</h4>
+	  
+	 <ion-list ng-repeat="articulo in inventario">
+     <!--  <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap" href="#/tab/chats/{{articulo.$id}}"> -->
+     <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap">
+        <img ng-src="{{chat.face}}">
+        <h2 ng-bind="articulo.nombre"></h2>
+        <p ng-bind="articulo.precio"></p>
+        <i class="icon ion-minus-circled"></i>
+
+      <!--   <ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Delete
+        </ion-option-button> -->
+      </ion-item>
+    </ion-list>
+	   <!--  <ion-list>
+	    <ion-toggle  ng-model="settings.enableFriends">
+	        Enable Friends
+	    </ion-toggle>
+	    </ion-list> -->
+  </ion-content>
+</ion-view>

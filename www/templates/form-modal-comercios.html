@@ -1,0 +1,21 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-dark">
+        <h1 class="title">Agregar nuevo comercio</h1>
+        <button class="button button-icon" ng-click="closeModal()">
+            <i class="icon ion-android-close"></i>
+        </button>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="crearComercio(item)">
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input ng-model="item.name" type="text" placeholder="Comercio">
+                </label>
+                <label class="item item-input">
+                    <textarea ng-model="item.description" rows="2" placeholder="Descripción"></textarea>
+                </label>
+                <button type="submit" class="button button-block button-positive">Create Task</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

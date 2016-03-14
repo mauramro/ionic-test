@@ -4,27 +4,22 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{item.name}}" ng-controller="ChatDetailCtrl">
+<ion-view view-title="{{ comercio.name }}" ng-controller="ChatDetailCtrl">
   <ion-content class="padding">
     <img ng-src="{{chat.face}}" style="width: 64px; height: 64px">
     <p>
-      Descripción: {{ item.name }}
+      Descripción: {{ comercio.name }}
     </p>
     
     <!-- products delivered -->
     <h4>Agregar mercaderia</h4>
-    <form ng-submit="addItems(merc)">
+    <form ng-submit="addItems(item)">
       <div class="list">  
           <label class="item item-input item-select">
             <div class="input-label">
-              Tipo de mercaderia
+              Articulo
             </div>
-            <select ng-model="Answers[Items.Name]" ng-options="option for option in Items[0].Options"></select>
-           <!--  <select>
-              <option selected>Aretes</option>
-              <option>Collares</option>
-              <option>Anillos</option>
-            </select> -->
+            <select ng-model="Answers['nombre']" ng-options="option for option in artComercio"></select>
           </label>
           <label class="item item-input">
             <input ng-model="item.quantity" type="number" placeholder="Número de productos"/>
