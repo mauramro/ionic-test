@@ -7,26 +7,22 @@
 <ion-view view-title="{{ comercio.name }}" ng-controller="ChatDetailCtrl">
   <ion-content class="padding">
     <img ng-src="{{chat.face}}" style="width: 64px; height: 64px">
+    <button class="button icon ion-plus-circled button-assertive button-right" ng-click="openModal()"></button>
     <p>
       Descripción: {{ comercio.name }}
     </p>
     
-    <!-- products delivered -->
-    <h4>Agregar mercaderia</h4>
-    <form ng-submit="addItems(item)">
-      <div class="list">  
-          <label class="item item-input item-select">
-            <div class="input-label">
-              Articulo
-            </div>
-            <select ng-model="Answers['nombre']" ng-options="option for option in artComercio"></select>
-          </label>
-          <label class="item item-input">
-            <input ng-model="item.quantity" type="number" placeholder="Número de productos"/>
-          </label>
-          <button type="submit" class="button button-block button-positive">Agregar items</button>
-      </div>
-    </form>
+
+    <ion-list ng-repeat="art in invComercio">
+      <!-- <ion-item class="item-remove-animate item-avatar item-icon-right"type="item-text-wrap" href="#/tab/chats/{{comercio.$id}}"> -->
+      <ion-item>
+        <!-- <img ng-src="{{chat.face}}"> -->
+        <span>{{ art.name }} x {{art.quantity}}</span>
+        <span class="item-note" ng-bind="art.price"></span>
+        <!-- <i class="icon ion-android-arrow-dropright icon-accessory"></i> -->
+
+      </ion-item>
+    </ion-list>
 
   </ion-content>
 </ion-view>

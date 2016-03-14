@@ -1,0 +1,26 @@
+<ion-modal-view>
+    <ion-header-bar class="bar-dark">
+        <h1 class="title">Agregar a inventario</h1>
+        <button class="button button-icon" ng-click="closeModal()">
+            <i class="icon ion-android-close"></i>
+        </button>
+    </ion-header-bar>
+    <ion-content>
+        <!-- products delivered -->
+        <!-- <h4>Agregar mercaderia</h4> -->
+        <form ng-submit="addItems(item)">
+          <div class="list">  
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Articulo
+                </div>
+                <select ng-model="Answers['nombre']" ng-options="option for option in artComercio"></select>
+              </label>
+              <label class="item item-input">
+                <input ng-model="item.quantity" type="number" placeholder="Número de productos"/>
+              </label>
+              <button type="submit" class="button button-block button-positive">Agregar articulo</button>
+          </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

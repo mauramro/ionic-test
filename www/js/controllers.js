@@ -44,14 +44,13 @@ angular.module('starter.controllers', ['starter.services'])
   // console.log($scope.comercios);
 
   $scope.crearComercio = function (item) {
-      var item = item;
+      $scope.item = item;
 
       $scope.comercios.$add({
-        "name": item.name,
-        "description": item.description
+        "name": $scope.item.name,
+        "description": $scope.item.description
       });
       //close new task modal
-      
       $scope.modal.hide();
   };
 
@@ -67,62 +66,81 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.modal = modal;
   });
   $scope.openModal = function() {
+    $scope.item = {};
     $scope.modal.show();
   };
   $scope.closeModal = function() {
     $scope.modal.hide();
   };
   //Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modal.remove();
-  });
+  // $scope.$on('$destroy', function() {
+  //   $scope.modal.remove();
+  // });
   // Execute action on hide modal
-  $scope.$on('modal.hidden', function() {
-    // Execute action
-  });
-  // Execute action on remove modal
-  $scope.$on('modal.removed', function() {
-    // Execute action
-  });
+  // $scope.$on('modal.hidden', function() {
+  //   // Execute action
+  // });
+  // // Execute action on remove modal
+  // $scope.$on('modal.removed', function() {
+  //   // Execute action
+  // });
 
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Items, $firebaseArray) {
+.controller('ChatDetailCtrl', function($scope, $stateParams, Items, $firebaseArray, $ionicModal) {
+  $scope.$on('$ionicView.enter', function(e) {
+  console.log(e);
 
-  //getting db comercios
-  $scope.comercios = $firebaseArray(Items.comerciosRef());
+    $ionicModal.fromTemplateUrl('templates/form-modal-comercio-articulos.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    $scope.openModal = function() {
+      $scope.item = {};
+      $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+    //getting db comercios
+    $scope.comercios = $firebaseArray(Items.comerciosRef());
 
-  $scope.comercios.$loaded().then(function(){
-    angular.forEach($scope.comercios, function(item) {
-      if (item.$id === $stateParams.chatId ) {
-        $scope.comercio = item;
-        // console.log($scope.comercio);
-        // return $scope.comercio;
-      }
-    })
-  });
+    $scope.comercios.$loaded().then(function(){
+      angular.forEach($scope.comercios, function(item) {
+        if (item.$id === $stateParams.chatId ) {
+          $scope.comercio = item;
+          $scope.invComercio = item.articulos;
+          // console.log($scope.comercio);
+          // return $scope.comercio;
+        }
+      })
+    });
 
-  // console.log($stateParams.chatId);
-  // Detailed section
-  $scope.inventario = $firebaseArray(Items.inventarioRef());
-  // console.log($scope.inventario);
-  $scope.Answers = {};
-  $scope.artComercio = [];
+    // console.log($stateParams.chatId);
+    // Detailed section
+    $scope.inventario = $firebaseArray(Items.inventarioRef());
+    // console.log($scope.inventario);
+    $scope.Answers = {};
+    $scope.artComercio = [];
 
-  $scope.inventario.$loaded().then(function(){
-    angular.forEach($scope.inventario, function(articulo) {
-      // if (articulo.$id === $stateParams.chatId ) {
-        $scope.artInventario = articulo;
-        console.log($scope.artInventario);
-        $scope.artComercio.push($scope.artInventario.nombre);
-        console.log($scope.artComercio);
-        // console.log($scope.comercio);
-        // return $scope.comercio;
-      // }
-    })
-  });
-  console.log($scope.artComercio);
-  $scope.addItems = function (item) {
+    $scope.inventario.$loaded().then(function(){
+
+      angular.forEach($scope.inventario, function(articulo) {
+        // if (articulo.$id === $stateParams.chatId ) {
+          $scope.artInventario = articulo;
+          // console.log($scope.artInventario);
+          $scope.artComercio.push($scope.artInventario.nombre);
+          // console.log($scope.artComercio);
+          // console.log($scope.comercio);
+          // return $scope.comercio;
+        // }
+      })
+
+    });
+
+      $scope.addItems = function (item) {
       var itemName = $scope.Answers.nombre;
       console.log(itemName);
       // console.log($scope.items.$ref().child($stateParams.chatId).toString());
@@ -141,7 +159,10 @@ angular.module('starter.controllers', ['starter.services'])
       // console.log($scope.Answers);
       // console.log($scope.Answers.nombre);
       // console.log($scope.currentId);
-  };
+      $scope.modal.hide();
+    };
+
+  });
 })
 
 .controller('AccountCtrl', function($scope, $ionicModal, Items, $firebaseArray) {
